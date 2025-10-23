@@ -1,11 +1,11 @@
 NAME		= philo
 CC		= cc
-CFLAGS	= -Wall -Wextra -Werror -g -fsanitize=thread 
+CFLAGS	= -Wall -Wextra -Werror
 AR		= ar rcs
 RM		= rm -f
-TSAN_LIB = /usr/lib/x86_64-linux-gnu/libtsan.so.0
 SRCS	= main.c \
 			philo_util.c \
+			philo_util2.c \
 			philo_init.c \
 			philo_action.c \
 			philo_life.c \

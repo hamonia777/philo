@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_util.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jinwpark <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/24 06:04:13 by jinwpark          #+#    #+#             */
+/*   Updated: 2025/10/24 06:04:17 by jinwpark         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
-int	ft_atoi(const	char	*str)
+int	ft_atoi(const char *str)
 {
-	long		total;
-	long		minus;
+	long	total;
+	long	minus;
 
 	minus = 1;
 	total = 0;
