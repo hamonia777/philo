@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_monitor.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jinwpark <jinwpark@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jinwpark <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/24 06:04:51 by jinwpark          #+#    #+#             */
-/*   Updated: 2025/10/24 06:56:18 by jinwpark         ###   ########.fr       */
+/*   Created: 2025/10/25 09:47:16 by jinwpark          #+#    #+#             */
+/*   Updated: 2025/10/25 09:47:18 by jinwpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static int	are_all_philos_full(t_info *info)
 	if (full_philos_count == info->philo_num)
 	{
 		pthread_mutex_lock(info->lock);
-		printf("All philo is full");
 		info->is_end = 1;
 		pthread_mutex_unlock(info->lock);
 		return (1);

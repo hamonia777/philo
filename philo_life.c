@@ -6,7 +6,7 @@
 /*   By: jinwpark <jinwpark@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 06:03:59 by jinwpark          #+#    #+#             */
-/*   Updated: 2025/10/24 08:43:00 by jinwpark         ###   ########.fr       */
+/*   Updated: 2025/10/25 09:49:48 by jinwpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,34 @@
 void	*philo_lifetime(void *arg)
 {
 	t_philo	*philo;
-	int		break_flag;
 
-	break_flag = 0;
 	philo = (t_philo *)arg;
 	while (get_time() < philo->info->start_time)
 		usleep(100);
+	pthread_mutex_lock(philo->info->lock);
+	philo->last_time = philo->info->start_time;
+	pthread_mutex_unlock(philo->info->lock);
 	if (philo->id % 2 == 0)
 		ft_usleep(philo->info->time_eat / 2, philo);
 	while (1)
 	{
-		pthread_mutex_lock(philo->info->lock);
-		if (philo->info->is_end || (philo->info->must_eat != -1
-				&& philo->eat_count >= philo->info->must_eat))
-			break_flag = 1;
-		pthread_mutex_unlock(philo->info->lock);
-		if (break_flag == 1)
+		if (check_death(philo))
 			break ;
-		else
+		pthread_mutex_lock(philo->info->lock);
+		if (philo->info->must_eat != -1
+			&& philo->eat_count >= philo->info->must_eat)
 		{
-			philo_eat(philo);
-			philo_sleep(philo);
-			philo_think(philo);
+			pthread_mutex_unlock(philo->info->lock);
+			break ;
 		}
+		pthread_mutex_unlock(philo->info->lock);
+		philo_eat(philo);
+		if (check_death(philo))
+			break ;
+		philo_sleep(philo);
+		if (check_death(philo))
+			break ;
+		philo_think(philo);
 	}
 	return (NULL);
 }
